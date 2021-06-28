@@ -41,16 +41,22 @@
 
 .calculator__keyboard > *:first-child {
   grid-row: 1 / 1;
-  grid-column: 1 / 1;
+  grid-column: 1 / 3;
 }
 
 .calculator__keyboard > * {
   border: 1px white solid;
 }
 
-.calculator__keyboard > *:nth-child(3n-2):nth-last-of-type(1) {
+/* .calculator__keyboard > *:nth-child(3n-2):nth-last-of-type(1) {
+  grid-column: span 2;
+} */
+
+.calculator__keyboard > *:nth-child(1n):nth-last-of-type(1) {
   grid-column: span 2;
 }
+
+
 
 .calculator__key {
   border: 1px solid red;

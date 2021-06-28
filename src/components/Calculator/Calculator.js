@@ -12,6 +12,8 @@ const Calculator = observer(() => {
     rightOperand: 0,
     operatop: '',
     result: 0,
+    data: 0,
+    historyData: '0',
     calculate(leftOperand, rightOperand, operator) {
       console.log('leftOperand', leftOperand);
       console.log('rightOperand', rightOperand);
@@ -40,24 +42,38 @@ const Calculator = observer(() => {
       this.rightOperand = 0;
       this.operatop = '';
       this.result = 0;
+      this.data = 0;
+      this.historyData = 0;
     },
     display(evt) {
-      if (!isNaN(Number(evt.target.textContent))) {
+      if (!isNaN(Number(evt.target.textContent)) || (evt.target.textContent === '.')) {
         if (!this.isRightOperand) {
-          this.mainInput = parseInt(this.mainInput + evt.target.textContent);
-          this.leftOperand = this.mainInput;
+          this.data = String(this.data + evt.target.textContent);
+          this.mainInput = this.data.slice(1);
+
+          if (this.data.includes('.')) {
+            this.leftOperand = parseFloat(this.data);
+          } else {
+            this.leftOperand = parseInt(this.data);
+          }
         } else {
-          // this.mainInput = parseInt(this.mainInput + evt.target.textContent);
-          // this.rightOperand = this.mainInput;
-          this.rightOperand = parseInt(this.rightOperand + evt.target.textContent);
-          this.mainInput = this.rightOperand;
+          this.data = String(this.data + evt.target.textContent);
+          this.mainInput = this.data.slice(1);
+
+          if (this.data.includes('.')) {
+            this.rightOperand = parseFloat(this.data);
+          } else {
+            this.rightOperand = parseInt(this.data);
+          }
         }
 
       } else {
         if (evt.target.textContent !== 'DEL') {
-          this.historyInput = String(this.historyInput + this.mainInput + evt.target.textContent);
+          this.historyData = String(this.historyData + this.mainInput + evt.target.textContent);
+          console.log('this.historyData', this.historyData);
+          this.historyInput = this.historyData.slice(1);
           this.isRightOperand = true;
-          // this.mainInput = 0;
+          this.data = 0;
         }
 
         if ((evt.target.textContent !== '=') && (evt.target.textContent !== 'DEL')) {
@@ -65,7 +81,14 @@ const Calculator = observer(() => {
         }
 
         if (evt.target.textContent === 'DEL') {
-          this.mainInput = parseInt(String(this.mainInput).slice(0, String(this.mainInput).length - 1));
+          if (this.data.includes('.')) {
+            this.mainInput = parseFloat(String(this.mainInput).slice(0, String(this.mainInput).length - 1));
+            this.leftOperand = this.mainInput;
+          } else {
+            this.mainInput = parseInt(String(this.mainInput).slice(0, String(this.mainInput).length - 1));
+            this.leftOperand = this.mainInput;
+          }
+
           if (!this.mainInput) {
             this.mainInput = 0;
           }
@@ -77,25 +100,17 @@ const Calculator = observer(() => {
           }
         }
 
-      }
+        if (evt.target.textContent === '=') {
+          this.calculate(this.leftOperand, this.rightOperand, this.operatop);
+          this.mainInput = this.result;
+          this.leftOperand = this.result;
+          this.data = String(this.result);
+        }
 
-      if (evt.target.textContent === '=') {
-        // this.historyInput.slice(0, -1);
-        this.calculate(this.leftOperand, this.rightOperand, this.operatop);
-        this.mainInput = this.result;
+        if (evt.target.textContent === 'AC') {
+          this.clear();
+        }
       }
-
-      if (evt.target.textContent === 'AC') {
-        this.clear();
-      }
-
-      // if (evt.target.textContent === 'DEL') {
-      //   this.mainInput = parseInt(String(this.mainInput).slice(0, String(this.mainInput).length - 1));
-      //   if (!this.mainInput) {
-      //     this.mainInput = 0;
-      //   }
-      //   console.log('this.mainInput', this.mainInput);
-      // }
     }
   }));
 
