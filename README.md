@@ -1,7 +1,7 @@
 # calculator
 
 ## Ссылка на проект
-
+https://vitalic-web.github.io/calculator/
 
 ## Описание
 Калькулятор
