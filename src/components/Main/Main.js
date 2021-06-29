@@ -1,4 +1,4 @@
-import './main.css';
+import './Main.css';
 import Calculator from '../Calculator/Calculator';
 
 function Main() {

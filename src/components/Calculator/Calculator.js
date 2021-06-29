@@ -1,4 +1,4 @@
-import './calculator.css';
+import './Calculator.css';
 import { observer, useLocalObservable } from "mobx-react-lite";
 import { buttons } from '../../utils/constants';
 
@@ -28,7 +28,7 @@ const Calculator = observer(() => {
       } else if (operator === '*') {
         this.result = leftOperand * rightOperand;
         console.log('this.result', this.result);
-      } else if (operator === '/') {
+      } else if (operator === '÷') {
         this.result = leftOperand / rightOperand;
         console.log('this.result', this.result);
       }

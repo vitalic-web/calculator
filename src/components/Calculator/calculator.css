@@ -2,15 +2,17 @@
   display: flex;
   flex-direction: column;
   width: 20%;
-  border: 1px solid green;
+  background: white;
+  margin: 60px 0;
 }
 
 .calculator__screen {
   width: 100%;
-  border: 1px solid red;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  background: #2F4F4F;
+  color: white;
 }
 
 .calculator__screen-history {
@@ -24,11 +26,11 @@
 }
 
 .calculator__keyboard {
-  border: 1px solid blue;
   display: grid;
   grid-auto-rows: 1fr;
   grid-template-columns: repeat(4, 1fr);
-  grid-gap: 1vw;
+  grid-gap: 2px;
+  color: #2F4F4F;
 }
 
 .calculator__keyboard::before {
@@ -56,11 +58,15 @@
   grid-column: span 2;
 }
 
-
-
 .calculator__key {
-  border: 1px solid red;
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 30px;
+  border: 0.1px solid gray;
+  background: #E0FFFF;
+}
+
+.calculator__key:active {
+  border: 0.1px dotted gray;
 }
