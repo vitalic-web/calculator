@@ -15,22 +15,14 @@ const Calculator = observer(() => {
     data: 0,
     historyData: '0',
     calculate(leftOperand, rightOperand, operator) {
-      console.log('leftOperand', leftOperand);
-      console.log('rightOperand', rightOperand);
-      console.log('operator', operator);
-
       if (operator === '+') {
         this.result = leftOperand + rightOperand;
-        console.log('this.result', this.result);
       } else if (operator === '-') {
         this.result = leftOperand - rightOperand;
-        console.log('this.result', this.result);
       } else if (operator === '*') {
         this.result = leftOperand * rightOperand;
-        console.log('this.result', this.result);
       } else if (operator === '÷') {
         this.result = leftOperand / rightOperand;
-        console.log('this.result', this.result);
       }
     },
     clear() {
@@ -70,7 +62,6 @@ const Calculator = observer(() => {
       } else {
         if (evt.target.textContent !== 'DEL') {
           this.historyData = String(this.historyData + this.mainInput + evt.target.textContent);
-          console.log('this.historyData', this.historyData);
           this.historyInput = this.historyData.slice(1);
           this.isRightOperand = true;
           this.data = 0;
